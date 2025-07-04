@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Route List</h2>
+<a href="/routes/add/" class="btn btn-success mb-2">Add Route</a>
+<table class="table table-bordered">
+    <thead><tr><th>ID</th><th>Bus</th><th>From</th><th>To</th><th>Date</th><th>Time</th><th>Price</th><th>Actions</th></tr></thead>
+    <tbody>
+        {% for route in routes %}
+        <tr>
+            <td>{{ route.id }}</td>
+            <td>{{ route.bus }}</td>
+            <td>{{ route.from_city }}</td>
+            <td>{{ route.to_city }}</td>
+            <td>{{ route.date }}</td>
+            <td>{{ route.time }}</td>
+            <td>{{ route.price }}</td>
+            <td>
+                <a href="/routes/{{ route.id }}/edit/" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/routes/{{ route.id }}/delete/" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

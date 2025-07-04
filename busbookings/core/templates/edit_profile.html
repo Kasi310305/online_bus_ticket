@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow animate__animated animate__fadeIn">
+        <div class="card-body">
+          <h4 class="mb-4">Edit Your Profile</h4>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+              {{ user_form.as_p }}
+            </div>
+            <div class="mb-3">
+              {{ profile_form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="{% url 'profile' %}" class="btn btn-secondary">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

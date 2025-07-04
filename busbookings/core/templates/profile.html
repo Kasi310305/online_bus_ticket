@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow animate__animated animate__fadeIn">
+        <div class="card-header bg-primary text-white text-center">
+          <h4>User Profile</h4>
+        </div>
+        <div class="card-body d-flex flex-column flex-md-row align-items-center">
+          <div class="text-center me-md-4 mb-4 mb-md-0">
+            {% if user.profile.picture %}
+              <img src="{{ user.profile.picture.url }}" class="rounded-circle border" width="150" height="150" alt="Profile Picture">
+            {% else %}
+              <img src="https://via.placeholder.com/150" class="rounded-circle border" alt="No Photo">
+            {% endif %}
+          </div>
+          <div>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>First Name:</strong> {{ user.first_name }}</p>
+            <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Joined:</strong> {{ user.date_joined|date:"F d, Y" }}</p>
+
+            <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary btn-sm mt-2">Edit Profile</a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

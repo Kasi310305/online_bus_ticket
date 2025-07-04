@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Payment{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">💳 Dummy Payment</h2>
+
+  <div class="card p-4 shadow-sm">
+    <p><strong>Booking ID:</strong> {{ booking.id }}</p>
+    <p><strong>Route:</strong> {{ booking.route.from_city }} → {{ booking.route.to_city }}</p>
+    <p><strong>Date:</strong> {{ booking.route.date }}</p>
+    <p><strong>Seats:</strong>
+      {% for seat in booking.seat.all %}
+        <span class="badge bg-secondary">{{ seat.seat_number }}</span>
+      {% endfor %}
+    </p>
+    <p><strong>Total Fare:</strong> ₹{{ total_fare }}</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <button class="btn btn-success mt-3">
+        ✅ Confirm Dummy Payment
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

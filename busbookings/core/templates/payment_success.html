@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+{% block title %}Payment Success{% endblock %}
+{% block content %}
+<div class="container mt-5 text-center">
+  <div class="alert alert-success">
+    <h3>✅ Payment Successful!</h3>
+    <p>Thank you for booking with us.</p>
+    <p><strong>Booking ID:</strong> {{ booking.id }}</p>
+    <p><strong>Route:</strong> {{ booking.route.from_city }} → {{ booking.route.to_city }}</p>
+    <p><strong>Seats:</strong>
+      {% for seat in booking.seat.all %}
+        <span class="badge bg-primary">{{ seat.seat_number }}</span>
+      {% endfor %}
+    </p>
+    <p><strong>Total Fare:</strong> ₹{{ booking.seat.count|multiply:booking.route.price }}</p>
+
+    <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary mt-3">Go to Dashboard</a>
+    <a href="{% url 'download_ticket' booking.id %}" class="btn btn-success mt-3">🎫 Download Ticket</a>
+  </div>
+</div>
+{% endblock %}

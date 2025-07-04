@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Booking History{% endblock %}
+{% block content %}
+<h2>Your Bookings</h2>
+{% for booking in bookings %}
+    <div class="card mb-3 animate__animated animate__fadeIn">
+        <div class="card-body">
+            <h5 class="card-title">{{ booking.route.bus.bus_name }} ({{ booking.route.bus.bus_number }})</h5>
+            <p class="card-text">{{ booking.route.from_city }} → {{ booking.route.to_city }}</p>
+            <p>Date: {{ booking.route.date }} | Seat: {{ booking.seat.seat_number }}</p>
+            <p>Status: {% if booking.is_cancelled %}Cancelled{% else %}Confirmed{% endif %}</p>
+            {% if not booking.is_cancelled %}
+                <a href="/cancel-booking/{{ booking.id }}/" class="btn btn-danger">Cancel</a>
+            {% else %}
+                <a href="/delete-booking/{{ booking.id }}/" class="btn btn-danger">Delete</a>
+            {% endif %}
+        </div>
+    </div>
+{% empty %}
+    <p>No bookings found.</p>
+{% endfor %}
+{% endblock %}

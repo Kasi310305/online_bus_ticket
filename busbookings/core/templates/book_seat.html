@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Book Seats{% endblock %}
+{% block content %}
+<div class="container mt-4 animate__animated animate__fadeIn">
+  <h4>Choose your seats for {{ route.bus.name }} ({{ route.from_city }} → {{ route.to_city }})</h4>
+  <p>Date: {{ route.date }}</p>
+
+  {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="row">
+      {% for seat in available_seats %}
+        <div class="col-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="seats" value="{{ seat.id }}" id="seat{{ seat.id }}">
+            <label class="form-check-label" for="seat{{ seat.id }}">
+              Seat {{ seat.seat_number }} – ₹{{ seat.fare }}
+            </label>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-success mt-3">Book Selected Seats</button>
+  </form>
+</div>
+{% endblock %}

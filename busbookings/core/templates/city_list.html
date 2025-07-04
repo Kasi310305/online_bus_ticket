@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>City List</h2>
+<a href="{% url 'city_add' %}" class="btn btn-success mb-2">Add City</a>
+<table class="table table-bordered">
+    <thead><tr><th>ID</th><th>Name</th><th>Actions</th></tr></thead>
+    <tbody>
+        {% for city in cities %}
+        <tr>
+            <td>{{ city.id }}</td>
+            <td>{{ city.name }}</td>
+            <td>
+                <a href="{% url 'city_edit' city.id %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'city_delete' city.id  %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

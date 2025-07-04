@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<h2 class="animate__animated animate__fadeIn">Search Buses</h2>
+<form method="get" class="row g-3">
+    <div class="col-md-4">
+        <label>From City</label>
+        <select name="from_city" class="form-control">
+            <option>----- select your pickup City -------</option>
+            {% for city in cities %}
+                <option value="{{ city.id }}">{{ city.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label>To City</label>
+        <select name="to_city" class="form-control">
+            <option>----- select your destination City -------</option>
+
+            {% for city in cities %}
+                <option value="{{ city.id }}">{{ city.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label>Date</label>
+        <input type="date" name="date" class="form-control" placeholder="{{ default_date }}">
+    </div>
+    <div class="col-12 mt-3">
+        <button class="btn btn-primary">Search</button>
+    </div>
+</form>
+<hr>
+{% if routes %}
+    <div class="row">
+      {% for route in routes %}
+      <div class="col-md-12 mb-4">
+        <div class="card shadow-lg ">
+          <div class="card-body">
+            <h5 class="card-title">{{ route.from_city }} → {{ route.to_city }}</h5>
+            <p class="card-text">
+              <strong>Bus:</strong> {{ route.bus.bus_name }}<br>
+              <strong>Bus number:</strong> {{ route.bus.bus_number }}<br>
+              <strong>Time:</strong> {{ route.time }}<br>
+              <strong>Date:</strong> {{ route.date }}<br>
+              <strong>Fare:</strong> ₹{{ route.price }}
+            </p>
+            <a href="{% url 'book_seat' route.id %}" class="btn btn-success">🚌 Book Now</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info text-center">
+      No routes available for today. Try changing your search filters.
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Bus List</h2>
+<a href="/buses/add/" class="btn btn-success mb-2">Add Bus</a>
+<table class="table table-bordered">
+    <thead><tr><th>ID</th><th>Name</th><th>Number</th><th>Total Seats</th><th>Actions</th></tr></thead>
+    <tbody>
+        {% for bus in buses %}
+        <tr>
+            <td>{{ bus.id }}</td>
+            <td>{{ bus.bus_name }}</td>
+            <td>{{ bus.bus_number }}</td>
+            <td>{{ bus.total_seats }}</td>
+            <td>
+                <a href="/buses/{{ bus.id }}/edit/" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/buses/{{ bus.id }}/delete/" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Seat List</h2>
+<a href="/seats/add/" class="btn btn-success mb-2">Add Seat</a>
+<table class="table table-bordered">
+    <thead><tr><th>ID</th><th>Route</th><th>Seat Number</th><th>Booked</th><th>Actions</th></tr></thead>
+    <tbody>
+        {% for seat in seats %}
+        <tr>
+            <td>{{ seat.id }}</td>
+            <td>{{ seat.route }}</td>
+            <td>{{ seat.seat_number }}</td>
+            <td>{{ seat.is_booked }}</td>
+            <td>
+                <a href="/seats/{{ seat.id }}/edit/" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/seats/{{ seat.id }}/delete/" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
